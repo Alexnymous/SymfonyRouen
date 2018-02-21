@@ -1,4 +1,4 @@
-
+{% set active = app.request.get('libellecategorie') | capitalize %}
 {#{{ dump(categories) }}#}
 
 <!--menu mobile-->
@@ -10,7 +10,7 @@
             </li>
             {% for categorie in categories %}
                 <li>
-                    <a href="{{ url('index_categorie', { libellecategorie : categorie.libelle | lower }) }}">{{ categorie.libelle }}</a>
+                <li {% if(active == categorie.libelle) %}class="current"{%endif%}>{{ categorie.libelle }}</a>
                 </li>
             {% endfor %}
         </ul>
