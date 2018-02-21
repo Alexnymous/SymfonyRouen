@@ -6,9 +6,10 @@
 
 {% block content %}
 
-{{ dump(articles) }}
+    {{ dump(articles) }}
+    {{ dump(categories) }}
 
-<div class="row">
+    <div class="row">
     <!--colleft-->
     <div class="col-md-8 col-sm-12">
         <div class="box-caption">
@@ -16,8 +17,7 @@
         </div>
         <!--sportlight-->
         <section class="owl-carousel owl-spotlight">
-            {% for article in articles %}
-                {% if article.spotlight %}
+            {% for article in spotlight %}
                     <div>
                         <article class="spotlight-item">
                             <div class="spotlight-img">
@@ -42,7 +42,6 @@
                             </div>
                         </article>
                     </div>
-                {% endif %}
             {% endfor %}
         </section>
 
@@ -78,5 +77,4 @@
     {# Sidebar #}
     {% include 'components/_sidebar.html.twig' %}
 
-    {% endblock %}
-
+{% endblock %}

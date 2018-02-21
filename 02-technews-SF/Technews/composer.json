@@ -22,7 +22,6 @@
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/twig-bundle": "^4.0",
         "symfony/validator": "^4.0",
-        "symfony/var-dumper": "^4.0",
         "symfony/web-link": "^4.0",
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "^4.0"
@@ -74,7 +73,7 @@
     },
     "extra": {
         "symfony": {
-            "id": "01C6PPTHKVHF8MV2BTE1QMGM72",
+            "id": "01C6PPTWCD9KJ3RCWJWWG7CJHZ",
             "allow-contrib": false
         }
     }

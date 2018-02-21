@@ -1,26 +1,30 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
- * @ORM\Table(name="Categorie")
- *
  */
 class Categorie
 {
-//--------------------- ID -----------------------------------------------------
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="string",length=50)
+     * @ORM\Column(type="integer")
      */
     private $id;
-
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $libelle;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="categorie")
+     */
+    private $articles;
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
     /**
      * @return mixed
      */
@@ -28,23 +32,13 @@ class Categorie
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
-
-//--------------------- LIBELLE -----------------------------------------------------
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-
-    private $libelle;
-
     /**
      * @return mixed
      */
@@ -52,42 +46,25 @@ class Categorie
     {
         return $this->libelle;
     }
-
     /**
      * @param mixed $libelle
      */
-    public function setLibelle($libelle): void
+    public function setLibelle($libelle)
     {
         $this->libelle = $libelle;
     }
-
-//--------------------- ARTICLE -----------------------------------------------------
-
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="categorie")
-     */
-
-    private $article;
-
     /**
      * @return mixed
      */
-    public function getArticle()
+    public function getArticles()
     {
-        return $this->article;
+        return $this->articles;
     }
-
     /**
-     * @param mixed $article
+     * @param mixed $articles
      */
-    public function setArticle($article): void
+    public function setArticles($articles)
     {
-        $this->article = $article;
-    }
-
-    public function __construct()
-    {
-        $this->articles = new ArrayCollection();
+        $this->articles = $articles;
     }
 }

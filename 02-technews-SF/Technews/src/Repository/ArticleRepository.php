@@ -25,4 +25,43 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findLastFiveArticle()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findArticleSuggestions($idarticle, $idcategorie)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.categorie = :categorie_id')->setParameter('categorie_id', $idcategorie)
+            ->andWhere('a.id != :article_id')->setParameter('article_id', $idarticle)
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findSpotlightArticles() {
+        return $this->createQueryBuilder('a')
+            ->where('a.spotlight = 1')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findSpecialArticles() {
+        return $this->createQueryBuilder('a')
+            ->where('a.special = 1')
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
 }

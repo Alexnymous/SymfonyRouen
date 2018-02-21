@@ -1,24 +1,57 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
- * @ORM\Table(name="Article")
  */
 class Article
 {
-
-//--------------------- ID -----------------------------.
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $titre;
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $contenu;
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $featuredimage;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $special;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $spotlight;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $datecreation;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categorie;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Auteur", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $auteur;
+    // ---------------------------- Constructeur
+    public function __construct()
+    {
+        $this->datecreation = new \DateTime();
+    }
+    // ---------------------------- Getters et Setters
     /**
      * @return mixed
      */
@@ -26,21 +59,13 @@ class Article
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
-//--------------------- TITRE ---------------------------
-    /**
-     * @ORM\Column(type="string", length=150)
-     */
-
-    private $titre;
-
     /**
      * @return mixed
      */
@@ -48,22 +73,13 @@ class Article
     {
         return $this->titre;
     }
-
     /**
      * @param mixed $titre
      */
-    public function setTitre($titre): void
+    public function setTitre($titre)
     {
         $this->titre = $titre;
     }
-
-//--------------------- CONTENU --------------------------
-    /**
-     * @ORM\Column(type="text")
-     */
-
-    private $contenu;
-
     /**
      * @return mixed
      */
@@ -71,23 +87,13 @@ class Article
     {
         return $this->contenu;
     }
-
     /**
      * @param mixed $contenu
      */
-    public function setContenu($contenu): void
+    public function setContenu($contenu)
     {
         $this->contenu = $contenu;
     }
-
-//--------------------- FEATUREDIMAGE ----------------------
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-
-    private $featuredimage;
-
     /**
      * @return mixed
      */
@@ -95,22 +101,13 @@ class Article
     {
         return $this->featuredimage;
     }
-
     /**
      * @param mixed $featuredimage
      */
-    public function setFeaturedimage($featuredimage): void
+    public function setFeaturedimage($featuredimage)
     {
         $this->featuredimage = $featuredimage;
     }
-
-//--------------------- SPECIAL --------------------------
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $special;
-
     /**
      * @return mixed
      */
@@ -118,21 +115,13 @@ class Article
     {
         return $this->special;
     }
-
     /**
      * @param mixed $special
      */
-    public function setSpecial($special): void
+    public function setSpecial($special)
     {
         $this->special = $special;
     }
-//--------------------- AUTEUR --------------------------
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $spotlight;
-
     /**
      * @return mixed
      */
@@ -140,23 +129,13 @@ class Article
     {
         return $this->spotlight;
     }
-
     /**
      * @param mixed $spotlight
      */
-    public function setSpotlight($spotlight): void
+    public function setSpotlight($spotlight)
     {
         $this->spotlight = $spotlight;
     }
-
-
-//--------------------- DATECREATION ---------------------
-    /**
-     * @ORM\Column(type="datetime")
-     */
-
-    private $datecreation;
-
     /**
      * @return mixed
      */
@@ -164,24 +143,13 @@ class Article
     {
         return $this->datecreation;
     }
-
     /**
      * @param mixed $datecreation
      */
-    public function setDatecreation($datecreation): void
+    public function setDatecreation($datecreation)
     {
         $this->datecreation = $datecreation;
     }
-
-
-//--------------------- CATEGORIE -------------------------
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="article")
-     * @ORM\JoinColumn(nullable=false)
-     */
-
-    private $categorie;
-
     /**
      * @return mixed
      */
@@ -189,24 +157,13 @@ class Article
     {
         return $this->categorie;
     }
-
     /**
      * @param mixed $categorie
      */
-    public function setCategorie($categorie): void
+    public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
     }
-
-
-//--------------------- AUTEUR -----------------------------
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Auteur", inversedBy="article")
-     * @ORM\JoinColumn(nullable=false)
-     */
-
-    private $auteur;
-
     /**
      * @return mixed
      */
@@ -214,13 +171,13 @@ class Article
     {
         return $this->auteur;
     }
-
     /**
      * @param mixed $auteur
      */
-    public function setAuteur($auteur): void
+    public function setAuteur($auteur)
     {
         $this->auteur = $auteur;
     }
-
 }
+
+

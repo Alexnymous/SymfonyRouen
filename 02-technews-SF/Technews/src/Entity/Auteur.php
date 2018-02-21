@@ -1,25 +1,60 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuteurRepository")
- * @ORM\Table(name="Auteur")
  */
 class Auteur
 {
-//--------------------- ID-----------------------------------------------------
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $prenom;
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $nom;
+    /**
+     * @ORM\Column(type="string", length=60, unique=true)
+     */
+    private $email;
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateinscription;
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $derniereconnexion;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="auteur")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $articles;
+    // -------------------------------- Constructeur
+    /**
+     * Auteur constructor.
+     */
+    public function __construct()
+    {
+        $this->dateinscription = new \DateTime();
+        $this->articles = new ArrayCollection();
+    }
     /**
      * @return mixed
      */
@@ -27,23 +62,13 @@ class Auteur
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
-
-
-//--------------------- PRENOM ------------------------------
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-
-    private $prenom;
-
     /**
      * @return mixed
      */
@@ -51,22 +76,13 @@ class Auteur
     {
         return $this->prenom;
     }
-
     /**
      * @param mixed $prenom
      */
-    public function setPrenom($prenom): void
+    public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
     }
-
-//--------------------- NOM ----------------------------------
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nom;
-
     /**
      * @return mixed
      */
@@ -74,23 +90,13 @@ class Auteur
     {
         return $this->nom;
     }
-
     /**
      * @param mixed $nom
      */
-    public function setNom($nom): void
+    public function setNom($nom)
     {
         $this->nom = $nom;
     }
-
-//--------------------- EMAIL -------------------------------
-
-    /**
-     * @ORM\Column(type="string", length=60, unique=true)
-     */
-
-    private $email;
-
     /**
      * @return mixed
      */
@@ -98,23 +104,13 @@ class Auteur
     {
         return $this->email;
     }
-
     /**
      * @param mixed $email
      */
-    public function setEmail($email): void
+    public function setEmail($email)
     {
         $this->email = $email;
     }
-
-//--------------------- PASSWORD -----------------------------
-
-    /**
-     * @ORM\Column(type="string", length=60)
-     */
-
-    private $password;
-
     /**
      * @return mixed
      */
@@ -122,23 +118,13 @@ class Auteur
     {
         return $this->password;
     }
-
     /**
      * @param mixed $password
      */
-    public function setPassword($password): void
+    public function setPassword($password)
     {
         $this->password = $password;
     }
-
-//--------------------- DATEINSCRIPTION ----------------------
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-
-    private $dateinscription;
-
     /**
      * @return mixed
      */
@@ -146,23 +132,13 @@ class Auteur
     {
         return $this->dateinscription;
     }
-
     /**
      * @param mixed $dateinscription
      */
-    public function setDateinscription($dateinscription): void
+    public function setDateinscription($dateinscription)
     {
         $this->dateinscription = $dateinscription;
     }
-
-
-//--------------------- ROLES ------------------------------
-    /**
-     * @ORM\Column(type="array")
-     */
-
-    private $roles;
-
     /**
      * @return mixed
      */
@@ -170,22 +146,13 @@ class Auteur
     {
         return $this->roles;
     }
-
     /**
      * @param mixed $roles
      */
-    public function setRoles($roles): void
+    public function setRoles($roles)
     {
         $this->roles = $roles;
     }
-
-//--------------------- DERNIERECONNEXION -------------------
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-
-    private $derniereconnexion;
-
     /**
      * @return mixed
      */
@@ -193,25 +160,13 @@ class Auteur
     {
         return $this->derniereconnexion;
     }
-
     /**
      * @param mixed $derniereconnexion
      */
-    public function setDerniereconnexion($derniereconnexion): void
+    public function setDerniereconnexion($derniereconnexion)
     {
         $this->derniereconnexion = $derniereconnexion;
     }
-
-//--------------------- ARTICLES --------------------------
-
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="auteur")
-     * @ORM\JoinColumn(nullable=true)
-     */
-
-    private $articles;
-
     /**
      * @return mixed
      */
@@ -219,22 +174,11 @@ class Auteur
     {
         return $this->articles;
     }
-
     /**
      * @param mixed $articles
      */
-    public function setArticles($articles): void
+    public function setArticles($articles)
     {
         $this->articles = $articles;
     }
-
-    public function __construct() {
-        $this->articles = new ArrayCollection();
-        $this->dateinscription = new ArrayCollection();
-    }
-
-
-
-
-
 }

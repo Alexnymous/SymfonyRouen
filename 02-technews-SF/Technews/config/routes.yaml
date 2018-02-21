@@ -1,6 +1,6 @@
 index:
-  path: /
-  controller: App\Controller\TechNews\IndexController::index
+    path: /
+    controller: App\Controller\TechNews\IndexController::index
 
 accueil:
     path: /accueil
