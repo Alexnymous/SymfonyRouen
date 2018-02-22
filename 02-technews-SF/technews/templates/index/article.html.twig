@@ -1,14 +1,11 @@
 {% extends "layout.html.twig" %}
 {% set active = app.request.get('libellecategorie') | capitalize %}
-
 {% block page_title %}
     Titre de notre article
 {% endblock %}
 
 {% block content %}
 
-    {#{{ dump(article) }}#}
-    {#{{ dump(suggestions) }}#}
 
     <div class="row">
         <!--colleft-->
@@ -18,7 +15,10 @@
                 <img alt="{{ article.titre }}" src="{{ asset('images/product/'~article.featuredimage) }}">
                 <h1>{{ article.titre }}</h1>
                 <div class="meta-post">
-                    <a href="#">
+                    <a href="{{ url('index_article', {
+                        'libellecategorie'  : article.categorie.libelle | slugify,
+                        'slugarticle'       : article.titre | slugify,
+                        'id'                : article.id }) }}">
                         {{ article.auteur.prenom ~ ' ' ~ article.auteur.nom }}
                     </a>
                     <em></em>
@@ -81,14 +81,23 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="spotlight-item-thumb">
                                 <div class="spotlight-item-thumb-img">
-                                    <a href="#">
+                                    <a href="{{ url('index_article', {
+                                        'libellecategorie'  : article.categorie.libelle | slugify,
+                                        'slugarticle'       : article.titre | slugify,
+                                        'id'                : article.id }) }}">
                                         <img alt="{{ article.titre }}" src="{{ asset('images/product/'~article.featuredimage) }}">
                                     </a>
-                                    <a href="#" class="cate-tag">{{ article.categorie.libelle }}</a>
+                                    <a href="{{ url('index_categorie', { 'libellecategorie' : article.categorie.libelle | slugify }) }}" class="cate-tag">{{ article.categorie.libelle }}</a>
                                 </div>
-                                <h3><a href="#">Donald Trump suggests the DNC was hacked by 'someone sitting on their bed that weighs 400 lbs'</a></h3>
+                                <h3><a href="{{ url('index_article', {
+                                        'libellecategorie'  : article.categorie.libelle | slugify,
+                                        'slugarticle'       : article.titre | slugify,
+                                        'id'                : article.id }) }}">Donald Trump suggests the DNC was hacked by 'someone sitting on their bed that weighs 400 lbs'</a></h3>
                                 <div class="meta-post">
-                                    <a href="#">
+                                    <a href="{{ url('index_article', {
+                                        'libellecategorie'  : article.categorie.libelle | slugify,
+                                        'slugarticle'       : article.titre | slugify,
+                                        'id'                : article.id }) }}">
                                         {{ article.auteur.prenom ~ ' ' ~ article.auteur.nom }}
                                     </a>
                                     <em></em>
@@ -104,7 +113,7 @@
         </div>
 
         {# Sidebar #}
-        {% include "components/_sidebar.html.twig" %}
+        {{ render(controller('App\\Controller\\TechNews\\IndexController::sidebar')) }}
 
     </div>
 {% endblock %}

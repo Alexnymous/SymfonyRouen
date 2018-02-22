@@ -1,3 +1,4 @@
+
 <!--colright-->
 <div class="col-md-4 col-sm-12">
     <!--tab popular-->
@@ -13,20 +14,24 @@
             <ul class="list-news-popular">
                 {% for article in articles  %}
 
-
                     <li>
-                        <a href="#">
-                            <img alt="{{ article.titre }}" src="{{ asset('images/product/'~article.featuredimage) }}">
+                        <a href="{{ url('index_article', {
+                            'libellecategorie'  : article.categorie.libelle | slugify,
+                            'slugarticle'       : article.titre | slugify,
+                            'id'                : article.id }) }}">
+                            <img alt="" src="{{ asset('images/product/'~article.featuredimage) }}">
                         </a>
                         <h3><a href="#">{{ article.titre }}</a></h3>
                         <div class="meta-post">
-                            <a href="#">
+                            <a href="{{ url('index_article', {
+                                'libellecategorie'  : article.categorie.libelle | slugify,
+                                'slugarticle'       : article.titre | slugify,
+                                'id'                : article.id }) }}">
                                 {{ article.auteur.prenom ~ ' ' ~ article.auteur.nom }}
-
                             </a>
                             <em></em>
                             <span>
-							 {{ article.datecreation | date('d/m/Y') }}
+							{{ article.datecreation | date('d/m/Y') }}
 						</span>
                         </div>
                     </li>
@@ -92,22 +97,31 @@
 			</span>
         </div>
         <div class="list-special">
-            <article class="news-two-large">
-                <a href="#">
-                    <img alt="" src="images/product/4.jpg">
-                </a>
-                <h3><a href="#">Six big ways MacOS Sierra is going to change your Apple experience</a></h3>
-                <div class="meta-post">
-                    <a href="#">
-                        Sue	Benson
-                    </a>
-                    <em></em>
-                    <span>
-						23 Sep 2016
-					</span>
-                </div>
+            {% for article in special %}
 
-            </article>
+                <article class="news-two-large">
+                    <a href="{{ url('index_article', {
+                        'libellecategorie'  : article.categorie.libelle | slugify,
+                        'slugarticle'       : article.titre | slugify,
+                        'id'                : article.id }) }}">
+                        <img alt="" src="{{ asset('images/product/'~article.featuredimage) }}">
+                    </a>
+                    <h3><a href="#">{{ article.titre }}</a></h3>
+                    <div class="meta-post">
+                        <a href="{{ url('index_article', {
+                            'libellecategorie'  : article.categorie.libelle | slugify,
+                            'slugarticle'       : article.titre | slugify,
+                            'id'                : article.id }) }}">
+                            {{ article.auteur.prenom ~ ' ' ~ article.auteur.nom }}
+                        </a>
+                        <em></em>
+                        <span>
+						{{ article.datecreation | date('d/m/Y') }}
+					</span>
+                    </div>
+
+                </article>
+            {% endfor %}
         </div>
     </div>
 </div>

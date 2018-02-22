@@ -18,7 +18,7 @@
                     <li><a href="{{ url('index') }}">Accueil</a></li>
                     {% for categorie in categories  %}
                     <li>
-                        <a href="{{ url('index_categorie', { libellecategorie : categorie.libelle | lower }) }}">{{ categorie.libelle }}</a>
+                        <a href="{{ url('index_categorie', { libellecategorie : categorie.libelle | slugify }) }}">{{ categorie.libelle }}</a>
                     </li>
                     {% endfor %}
                 </ul>
