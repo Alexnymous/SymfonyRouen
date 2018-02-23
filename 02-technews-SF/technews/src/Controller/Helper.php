@@ -1,12 +1,12 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Admin
+ * User: Hugo LIEGEARD
  * Date: 22/02/2018
- * Time: 17:31
+ * Time: 17:28
  */
 
-namespace App\Controller\TechNews;
+namespace App\Controller;
 
 
 Trait Helper

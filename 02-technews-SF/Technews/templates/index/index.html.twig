@@ -6,8 +6,10 @@
 
 {% block content %}
 
+    {{ dump(articles) }}
+    {{ dump(categories) }}
 
-<div class="row">
+    <div class="row">
     <!--colleft-->
     <div class="col-md-8 col-sm-12">
         <div class="box-caption">
@@ -16,37 +18,37 @@
         <!--sportlight-->
         <section class="owl-carousel owl-spotlight">
             {% for article in spotlight %}
-                <div>
-                    <article class="spotlight-item">
-                        <div class="spotlight-img">
-                            <img alt="{{ article.titre }}" src="{{ asset('images/product/'~article.featuredimage) }}" class="img-responsive" />
-                            <a href="{{ url('index_categorie', {'libellecategorie' : article.categorie.libelle | slugify}) }}" class="cate-tag">{{ article.categorie.libelle }}</a>
-                        </div>
-                        <div class="spotlight-item-caption">
-                            <h2 class="font-heading">
-                                <a href="{{ url('index_article', {
-                                    'libellecategorie'  : article.categorie.libelle | slugify,
-                                    'slugarticle'       : article.titre | slugify,
-                                    'id'                : article.id }) }}">
-                                    {{ article.titre }}
-                                </a>
-                            </h2>
-                            <div class="meta-post">
-                                <a href="{{ url('index_article', {
-                                    'libellecategorie'  : article.categorie.libelle | slugify,
-                                    'slugarticle'       : article.titre | slugify,
-                                    'id'                : article.id }) }}">
-                                    {{ article.auteur.prenom ~ ' ' ~ article.auteur.nom }}
-                                </a>
-                                <em></em>
-                                <span>
+                    <div>
+                        <article class="spotlight-item">
+                            <div class="spotlight-img">
+                                <img alt="{{ article.titre }}" src="{{ asset('images/product/'~article.featuredimage) }}" class="img-responsive" />
+                                <a href="{{ url('index_categorie', {'libellecategorie' : article.categorie.libelle | slugify}) }}" class="cate-tag">{{ article.categorie.libelle }}</a>
+                            </div>
+                            <div class="spotlight-item-caption">
+                                <h2 class="font-heading">
+                                    <a href="{{ url('index_article', {
+                                        'libellecategorie'  : article.categorie.libelle | slugify,
+                                        'slugarticle'       : article.titre | slugify,
+                                        'id'                : article.id }) }}">
+                                        {{ article.titre }}
+                                    </a>
+                                </h2>
+                                <div class="meta-post">
+                                    <a href="{{ url('index_article', {
+                                        'libellecategorie'  : article.categorie.libelle | slugify,
+                                        'slugarticle'       : article.titre | slugify,
+                                        'id'                : article.id }) }}">
+                                        {{ article.auteur.prenom ~ ' ' ~ article.auteur.nom }}
+                                    </a>
+                                    <em></em>
+                                    <span>
                                     {{ article.datecreation | date('d/m/Y') }}
                                 </span>
+                                </div>
                             </div>
-                        </div>
-                        {{ article.contenu | accroche }}
-                    </article>
-                </div>
+                            {{ article.contenu | accroche }}
+                        </article>
+                    </div>
             {% endfor %}
         </section>
 
@@ -91,4 +93,4 @@
     {# Sidebar #}
     {{ render(controller('App\\Controller\\TechNews\\IndexController::sidebar')) }}
 
-    {% endblock %}
+{% endblock %}
